@@ -169,12 +169,16 @@ select {
     flex-direction: column;
 }
 
+.right {
+    text-align: center;
+    margin-top: 1%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
 .fot {
     font-size: 15px !important;
     margin-top: 0.5%;
-}
-
-.btn-secondary :hover {
-    background-color: #0072b1 !important;
 }
 </style>
