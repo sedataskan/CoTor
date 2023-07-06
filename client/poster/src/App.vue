@@ -4,19 +4,19 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
   <header>
-        <div id="nav">
-          <nav class="container-fluid navbar navbar-expand-lg navbar-light bg-light">
-            <RouterLink to="/"  class="navbar-brand" href="/HomeView.vue">CoTor</RouterLink>
-        
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div id="nav">
+      <nav class="container-fluid navbar navbar-expand-lg navbar-light bg-light">
+        <RouterLink to="/" class="navbar-brand" href="/HomeView.vue">CoTor</RouterLink>
 
-              <div class="navbar-nav mr-auto">
-                <i> Create Your Content Easily </i>
-              </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-            </div>
-          </nav>
+          <div class="navbar-nav mr-auto">
+            <i> Create Your Content Easily </i>
+          </div>
+
         </div>
+      </nav>
+    </div>
   </header>
 
   <RouterView />
@@ -35,18 +35,18 @@ import { RouterLink, RouterView } from 'vue-router'
 }
 
 @media (max-width: 768px) {
-#nav {
-  padding: 0px;
-  text-align: center;
-}
+  #nav {
+    padding: 0px;
+    text-align: center;
+  }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+  #nav a {
+    font-weight: bold;
+    color: crimson;
+  }
 
-#nav a.router-link-exact-active {
-  border-radius: .5rem;
-}
+  #nav a.router-link-exact-active {
+    border-radius: .5rem;
+  }
 }
 </style>
