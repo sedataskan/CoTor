@@ -1,47 +1,42 @@
 <template>
-    <div id="content" class="grid-container">
+    <div class="grid-container">
         <div class="grid-item left">
-            <h5><i> Select a Special Date </i></h5>
-
-            <select v-model="selected">
-                <option disabled value="">Dates</option>
-                <option>Kurban Bayramı</option>
-                <option>Ramazan Bayramı</option>
-                <option>Anneler Günü</option>
-                <option>Babalar Günü</option>
-                <option>1 Ocak | Yılbaşı</option>
-                <option>4 Mart | Mühendisler Günü</option>
-                <option>8 Mart | Dünya Kadınlar Günü</option>
-                <option>18 Mart | Çanakkale Zaferi</option>
-                <option>23 Nisan | Ulusal Egemenlik ve Çocuk Bayramı</option>
-                <option>1 Mayıs | Emek ve Dayanışma Günü</option>
-                <option>19 Mayıs | Atatürk'ü Anma, Gençlik ve Spor Bayramı</option>
-                <option>15 Temmuz | Demokrasi ve Milli Birlik Günü</option>
-                <option>30 Ağustos | Zafer Bayramı</option>
-                <option>29 Ekim | Cumhuriyet Bayramı</option>
-                <option>10 Kasım | Atatürk'ün Ölüm Yıldönümü</option>
-                <option>24 Kasım | Öğretmenler Günü</option>
-            </select>
-            <button @click="selected = ''" type="button" class="btn button"> Clear </button>
             <div>
-                <button type="submit" class="btn btn-outline-danger button" value={{selected}}>Generate</button>
-                <i style="padding: 1%;"> {{ selected }} </i>
+
+                <h5><i> Selector </i></h5>
+
+                <br>
+
+                <div id="app" class="dropdown">
+                    <select v-model="selected">
+                        <option v-for="option in options" v-bind:value="option.value">
+                            {{ option.text }}
+                        </option>
+                    </select>
+
+                    <button @click="selected = ''" type="button" class="btn btn-outline-danger clear"><i
+                            class="fa fa-trash"></i>
+                    </button>
+
+                    <button type="submit" class="btn btn-danger button" value={{selected}}>Generate</button>
+                </div>
+                <br>
+                <i> Selected: {{ selected }} </i>
             </div>
 
             <hr>
 
-            <h5><i> Share</i></h5>
             <div>
-                <center>
-                    <button class="btn btn-outline-info button"><i class="fa fa-linkedin-square"></i></button>
-                </center>
-
+                <h5><i> Share </i></h5>
+                <br>
+                <div>
+                    <center>
+                        <button class="btn btn-secondary" style="font-size: 20px;"> LinkedIn <i
+                                class="fa fa-linkedin-square"></i></button>
+                    </center>
+                </div>
             </div>
         </div>
-
-        <!-- <div class="d-flex" style="height: 200px;">
-            <div class="vr"></div>
-        </div> -->
 
         <div class="grid-item right">
             <div id="preview">
@@ -53,15 +48,14 @@
                 <br>
 
                 <h6 class="label"> Generated Image </h6>
-                <div style="margin: 1%">
-                    <img src="https://via.placeholder.com/600" alt="Generated Image" width="600" height="600">
+                <div>
+                    <img class="img" src="https://via.placeholder.com/600" alt="Generated Image" width="400" height="400">
                 </div>
-
             </div>
         </div>
     </div>
 
-    <footer>
+    <footer id="footer">
         <div class="container-fluid footer">
             <div class="row">
                 <div class="col-md-12">
@@ -71,7 +65,6 @@
                         <a class="btn fot" href="https://www.linkedin.com/in/seda-n-taskan/" role="button"
                             target="_blank"><i class="fa fa-linkedin"></i></a>
                         <a class="btn fot" href="https://www.raquun.com/" target="_blank"><i>raquun.com</i></a>
-                        <br>
                         <a class="btn fot" href="https://github.com/imtribute12/Raquun" target="_blank">CoTor © 2023</a>
 
                     </center>
@@ -87,7 +80,25 @@ export default {
     name: 'HomeView',
     data() {
         return {
-            selected: ''
+            selected: '',
+            options: [
+                { text: 'Kurban Bayramı', value: 'Kurban Bayramı' },
+                { text: 'Ramazan Bayramı', value: 'Ramazan Bayramı' },
+                { text: 'Anneler Günü', value: 'Anneler Günü' },
+                { text: 'Babalar Günü', value: 'Babalar Günü' },
+                { text: '1 Ocak | Yılbaşı', value: '1 Ocak | Yılbaşı' },
+                { text: '4 Mart | Mühendisler Günü', value: '4 Mart | Mühendisler Günü' },
+                { text: '8 Mart | Dünya Kadınlar Günü', value: '8 Mart | Dünya Kadınlar Günü' },
+                { text: '18 Mart | Çanakkale Zaferi', value: '18 Mart | Çanakkale Zaferi' },
+                { text: '23 Nisan | Ulusal Egemenlik ve Çocuk Bayramı', value: '23 Nisan | Ulusal Egemenlik ve Çocuk Bayramı' },
+                { text: '1 Mayıs | Emek ve Dayanışma Günü', value: '1 Mayıs | Emek ve Dayanışma Günü' },
+                { text: '19 Mayıs | Atatürk\'ü Anma, Gençlik ve Spor Bayramı', value: '19 Mayıs | Atatürk\'ü Anma, Gençlik ve Spor Bayramı' },
+                { text: '15 Temmuz | Demokrasi ve Milli Birlik Günü', value: '15 Temmuz | Demokrasi ve Milli Birlik Günü' },
+                { text: '30 Ağustos | Zafer Bayramı', value: '30 Ağustos | Zafer Bayramı' },
+                { text: '29 Ekim | Cumhuriyet Bayramı', value: '29 Ekim | Cumhuriyet Bayramı' },
+                { text: '10 Kasım | Atatürk\'ün Ölüm Günü', value: '10 Kasım | Atatürk\'ün Ölüm Günü' },
+                { text: '24 Kasım | Öğretmenler Günü', value: '24 Kasım | Öğretmenler Günü' }
+            ]
         }
     }
 }
@@ -95,6 +106,38 @@ export default {
 </script>
 
 <style>
+* {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+select {
+    width: 50%;
+    padding: 9px 14px;
+    border: none;
+    border-radius: 4px;
+    background-color: #f1f1f1;
+}
+
+#footer {
+    background-color: crimson;
+    color: white;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 8%;
+}
+
+.dropdown {
+    font-size: 15px;
+    margin-top: 1%;
+}
+
 .grid-container {
     display: grid;
     grid-template-columns: 50% 50%;
@@ -106,55 +149,32 @@ export default {
     text-align: center;
 }
 
+.clear {
+    text-align: center;
+    font-size: 18px;
+    margin: 1%;
+}
+
 .label {
-    color: rgba(220, 20, 60, 0.755);
+    color: crimson;
     font-weight: bold;
     text-align: left;
 }
 
-.footer {
-    background-color: crimson;
-    color: white;
-    padding: 1%;
-    margin: 1%;
+.left {
     text-align: center;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 7rem;
+    margin-top: 1%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
 }
 
 .fot {
-    font-size: 16px !important;
+    font-size: 15px !important;
+    margin-top: 0.5%;
 }
 
-#content {
-    text-align: center;
-}
-
-select {
-    width: 50%;
-    padding: 16px 20px;
-    border: none;
-    border-radius: 4px;
-    background-color: #f1f1f1;
-}
-
-button {
-    background-color: crimson;
-    border: none;
-    color: white;
-    padding: 25px;
-    margin: 1%;
-    text-align: center;
-    text-decoration: none;
-    font-size: 16px;
-}
-
-.button {
-    padding: 30px;
-    text-align: center;
-    margin: 1%;
-    border-radius: 50%;
+.btn-secondary :hover {
+    background-color: #0072b1 !important;
 }
 </style>
