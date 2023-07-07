@@ -14,7 +14,7 @@
 
 ## UI
 <p align="center">
-  <img src="client/poster/public/assets/ui.png" >
+  <img src="/client/poster/public/ui.png" >
 </p>
 
 ## Technologies
