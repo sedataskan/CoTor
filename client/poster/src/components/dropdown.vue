@@ -9,13 +9,15 @@
         <button @click="selected = ''" type="button" class="btn btn-outline-danger clear"><i class="fa fa-trash"></i>
         </button>
 
-        <button type="submit" class="btn btn-danger button" value={{selected}}>Generate</button>
+        <button @click="getPost(selected)" type="submit" class="btn btn-danger button" value={{selected}}>Generate</button>
     </div>
     <br>
     <i> Selected: {{ selected }} </i>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     name: 'dropdown',
     data() {
@@ -39,6 +41,19 @@ export default {
                 { text: "10 Kasım | Atatürk'ün Ölüm Günü", value: "10 Kasım | Atatürk'ün Ölüm Günü" },
                 { text: "24 Kasım | Öğretmenler Günü", value: "24 Kasım | Öğretmenler Günü" }
             ]
+        }
+    },
+    methods: {
+        async getPost() {
+            axios.post('http://127.0.0.1:3000/generate', {
+                selected: this.selected
+            })
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
         }
     }
 }
