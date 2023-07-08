@@ -34,10 +34,15 @@
 | "pinia": "^2.1.3" | [pinia.vuejs.org](https://pinia.vuejs.org/) |
 | "vue": "^3.3.4" | [vuejs.org](https://vuejs.org/) |
 | "vue-router": "^4.2.2" | [router.vuejs.org](https://router.vuejs.org/) |
+|   |  |
+| "express": "^4.18.2" | [npmjs.com/package/expres](https://www.npmjs.com/package/express)s |
+| "axios": "^1.4.0" | [npmjs.com/package/axios](https://www.npmjs.com/package/axios) |
+| "nodemon": "^2.0.22" | [npmjs.com/package/nodemon](https://www.npmjs.com/package/nodemon) |
+|  "cors": "^2.8.5" | [pmjs.com/package/cors](https://www.npmjs.com/package/cors) |
 
 
 ## Api
 | Api | Link |
 | ------ | ------ |
-| -| <a href = "- "> - </a>|
+| OpenAI API | [openai.com/product](https://openai.com/product) |
 
