@@ -7,7 +7,8 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
+/server/node_modules
+/client/poster/node_modules
 .DS_Store
 dist
 dist-ssr
@@ -26,3 +27,5 @@ coverage
 *.njsproj
 *.sln
 *.sw?
+
+server/.env

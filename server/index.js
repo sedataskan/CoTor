@@ -3,6 +3,7 @@ const axios = require("axios");
 const app = express();
 const port = 3000;
 const cors = require("cors");
+require("dotenv").config();
 
 // CORS politikalarını yapılandırın
 app.use(cors());
@@ -32,7 +33,7 @@ app.post("/generate", async (req, res) => {
   //         headers: {
   //           "Content-Type": "application/json",
   //           Authorization:
-  //             "Bearer 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",
+  //             `Bearer ${process.env.OPENAI_API_KEY}`,
   //         },
   //       }
   //     );
