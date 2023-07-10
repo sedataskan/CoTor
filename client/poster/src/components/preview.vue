@@ -3,8 +3,8 @@
         <h5> <i>Preview</i> </h5>
 
         <h6 class="label"> Generated Message </h6>
-        <input type="text" readonly class="form-control" value="Generated Message">
-
+        <textarea readonly class="form-control" v-model="message" id="generated"
+            placeholder="Generated Message will appear here..." @input="adjustTextarea" />
         <br>
 
         <h6 class="label"> Generated Image </h6>
@@ -15,11 +15,18 @@
 </template>
 
 <script>
+
 export default {
     name: "Preview",
     data() {
-        return {
-        };
+        return {};
+    },
+    methods: {
+        adjustTextarea() {
+            const textarea = this.$refs.textarea;
+            textarea.style.height = auto;
+            textarea.style.overflow = hidden;
+        }
     }
 }
 </script>
@@ -29,5 +36,18 @@ export default {
     color: crimson;
     font-weight: bold;
     text-align: left;
+}
+
+.textarea-container {
+    height: fit-content;
+    height: auto;
+    overflow-y: auto;
+}
+
+textarea {
+    width: 100%;
+    height: auto;
+    resize: none;
+    overflow-y: auto;
 }
 </style>

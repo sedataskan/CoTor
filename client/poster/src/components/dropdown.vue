@@ -50,10 +50,14 @@ export default {
             })
                 .then(function (response) {
                     console.log(response);
+                    document.getElementById('generated').value = response.data.message;
                 })
                 .catch(function (error) {
+                    document.getElementById('generated').value = error.text;
                     console.log(error);
                 });
+
+
         }
     }
 }
