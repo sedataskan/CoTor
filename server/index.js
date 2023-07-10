@@ -4,6 +4,7 @@ const port = 3000;
 const cors = require("cors");
 require("dotenv").config();
 const { Configuration, OpenAIApi } = require("openai");
+const axios = require("axios");
 
 // CORS
 app.use(cors());
@@ -53,4 +54,52 @@ app.post("/generate", async (req, res) => {
       message: error.message,
     });
   }
+});
+
+//linkedin part
+
+linkedin_Api = process.env.LINKEDIN_API_KEY;
+linkedin_user_id = process.env.LINKEDIN_ID_KEY;
+
+app.post("/post", async () => {
+  console.log("post");
+  // try {
+  //   const accessToken = `Bearer ${linkedin_Api}`;
+
+  //   const postContent = {
+  //     author: `f'urn:li:person:${linkedin_user_id}`, // Gönderiyi oluşturan kişinin LinkedIn kullanıcı kimliği
+  //     lifecycleState: "PUBLISHED",
+  //     specificContent: {
+  //       "com.linkedin.ugc.ShareContent": {
+  //         shareCommentary: {
+  //           text: "Bu gönderi LinkedIn üzerinden paylaşıldı.", // Gönderi metni
+  //         },
+  //         shareMediaCategory: "NONE",
+  //       },
+  //     },
+  //     visibility: {
+  //       "com.linkedin.ugc.MemberNetworkVisibility": "CONNECTIONS", // Gönderinin görünürlük ayarı (CONNECTIONS, PUBLIC)
+  //     },
+  //   };
+
+  //   const response = await axios.post(
+  //     "https://api.linkedin.com/v2/ugcPosts",
+  //     postContent,
+  //     {
+  //       headers: {
+  //         Authorization: accessToken,
+  //         "Content-Type": "application/json",
+  //       },
+  //     }
+  //   );
+
+  //   console.log(response.data); // Gönderi oluşturulduğunda alınan yanıtı konsola yazdırabilirsiniz.
+
+  //   res.status(200).json({ message: "Gönderi başarıyla oluşturuldu." });
+  // } catch (error) {
+  //   console.error(error);
+  //   response
+  //     .status(500)
+  //     .json({ message: "Gönderi oluşturulurken bir hata oluştu." });
+  // }
 });
