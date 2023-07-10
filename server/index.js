@@ -1,48 +1,45 @@
 const express = require("express");
-const axios = require("axios");
 const app = express();
 const port = 3000;
 const cors = require("cors");
 require("dotenv").config();
+const { Configuration, OpenAIApi } = require("openai");
 
-// CORS politikalarını yapılandırın
+// CORS
 app.use(cors());
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
 
-// JSON verileri işlemek için gerekli middleware'leri etkinleştirme
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+const configuration = new Configuration({
+  organizationId: process.env.OPENAI_ORGANIZATION_ID,
+  apiKey: process.env.OPENAI_API_KEY,
+});
+const openai = new OpenAIApi(configuration);
 
-// OpenAI API'ye istek gönderen route
+// JSON
+app.use(express.json());
+
+// OpenAI API
 app.post("/generate", async (req, res) => {
   console.log(req.body);
-  //   try {
-  //     const { text, prompt } = req.body;
-
-  //     // OpenAI API'ye istek göndermek için axios
-  //     const response = await axios.post(
-  //       "https://api.openai.com/v1/engines/davinci-codex/completions",
-  //       {
-  //         prompt: prompt,
-  //         max_tokens: 50,
-  //       },
-  //       {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           Authorization:
-  //             `Bearer ${process.env.OPENAI_API_KEY}`,
-  //         },
-  //       }
-  //     );
-
-  //     const output = response.data.choices[0].text.trim();
-  //     res.json({ output });
-  //     console.log(output);
-  //   } catch (error) {
-  //     console.error(error);
-  //     res.status(500).json({ error: "An error occurred" });
-  //   }
+  const prompt = "bana " + req.body + " ile ilgili sosyal medya postu oluştur.";
+  try {
+    if (prompt == null) {
+      throw new Error("Uh oh, no prompt was provided");
+    }
+    const response = await openai.createCompletion({
+      model: "gpt-3.5-turbo-16k-0613",
+      prompt,
+    });
+    const completion = response.data.choices[0].text;
+    console.log(prompt, completion);
+    return res.status(200).json({
+      success: true,
+      message: completion,
+    });
+  } catch (error) {
+    console.log(error.message);
+  }
 });
