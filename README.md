@@ -26,6 +26,41 @@
   
   
 </p>
+
+## Run
+
+Clone the project
+
+```bash
+  git clone https://github.com/imtribute12/CoTor.git
+```
+
+Go to the project directory
+
+```bash
+  cd CoTor
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the app
+
+```bash
+  cd client/poster
+  npm run dev
+```
+
+Start the server
+
+```bash
+  cd server
+  npx nodemon
+```
+    
  
 ## Packages
 | Package | Link |
@@ -34,15 +69,19 @@
 | "pinia": "^2.1.3" | [pinia.vuejs.org](https://pinia.vuejs.org/) |
 | "vue": "^3.3.4" | [vuejs.org](https://vuejs.org/) |
 | "vue-router": "^4.2.2" | [router.vuejs.org](https://router.vuejs.org/) |
+| "vue-loading-overlay": "6.0" | [npmjs.com/package/vue-loading-overlay](https://www.npmjs.com/package/vue-loading-overlay) |
 |   |  |
-| "express": "^4.18.2" | [npmjs.com/package/expres](https://www.npmjs.com/package/express)s |
+| "express": "^4.18.2" | [npmjs.com/package/express](https://www.npmjs.com/package/express) |
 | "axios": "^1.4.0" | [npmjs.com/package/axios](https://www.npmjs.com/package/axios) |
 | "nodemon": "^2.0.22" | [npmjs.com/package/nodemon](https://www.npmjs.com/package/nodemon) |
 |  "cors": "^2.8.5" | [pmjs.com/package/cors](https://www.npmjs.com/package/cors) |
-
+|  "dotenv": "^16.3.1" | [npmjs.com/package/dotenv](https://www.npmjs.com/package/dotenv) |
+|  "openai": "^3.3.0"| [https://www.npmjs.com/package/openai](https://www.npmjs.com/package/openai) |
+    
 
 ## Api
 | Api | Link |
 | ------ | ------ |
 | OpenAI API | [openai.com/product](https://openai.com/product) |
+| Share on LinkedIn API | [learn.microsoft.com/share-on-linkedin](https://learn.microsoft.com/en-us/linkedin/consumer/integrations/self-serve/share-on-linkedin) |
 
