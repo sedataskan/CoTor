@@ -1,15 +1,17 @@
 <template>
-    <div id="preview">
+    <div>
         <h5> <i>Preview</i> </h5>
 
-        <h6 class="label"> Generated Message </h6>
-        <textarea readonly class="form-control" v-model="message" id="generated"
-            placeholder="Generated Message will appear here..." @input="adjustTextarea" />
-        <br>
+        <div class="post">
+            <img :src="imageUrl" class="img">
+            <p class="username"> Company Name </p>
+            <p class="label"> 07.10.2023 </p>
+        </div>
 
-        <h6 class="label"> Generated Image </h6>
+        <div class="text"> {{ shownText }} </div>
+        <br>
         <div>
-            <img class="img" src="https://via.placeholder.com/600" alt="Generated Image" width="400" height="400">
+            <img src="https://via.placeholder.com/600" alt="Generated Image" width="500" height="500">
         </div>
     </div>
 </template>
@@ -18,36 +20,62 @@
 
 export default {
     name: "Preview",
-    data() {
-        return {};
+    props: {
+        message: {
+            type: String,
+            required: true
+        }
     },
-    methods: {
-        adjustTextarea() {
-            const textarea = this.$refs.textarea;
-            textarea.style.height = auto;
-            textarea.style.overflow = hidden;
+    data() {
+        return {
+            imageUrl: "https://cdn-icons-png.flaticon.com/512/44/44948.png?w=740&t=st=1689073293~exp=1689073893~hmac=e5fa93103e45bc05deda27d257b470cdaecf7aba1f75880621d7fba63e608ac2",
+        };
+    },
+    computed: {
+        shownText() {
+            return this.message ?? "Generated Message will appear here...";
         }
     }
 }
 </script>
 
 <style scoped>
-.label {
+.username {
     color: crimson;
     font-weight: bold;
     text-align: left;
 }
 
-.textarea-container {
-    height: fit-content;
-    height: auto;
-    overflow-y: auto;
+.img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: block;
 }
 
-textarea {
-    width: 100%;
-    height: auto;
-    resize: none;
-    overflow-y: auto;
+.label {
+    color: #808080;
+    font-size: 12px;
+    text-align: right;
+}
+
+.img,
+.username,
+.label {
+    display: inline;
+    margin-left: 1%;
+    margin-bottom: 1%;
+}
+
+.post {
+    flex-direction: row;
+    text-align: left;
+}
+
+.text {
+    text-align: left;
+    margin-left: 1%;
+    margin-bottom: 1%;
 }
 </style>

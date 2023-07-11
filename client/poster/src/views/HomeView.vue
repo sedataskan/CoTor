@@ -1,18 +1,18 @@
 <template>
     <div class="grid-container">
         <div class="grid-item left">
-            <Selector />
+            <Selector @data-fetched="dataFetched" />
             <Share />
         </div>
         <div class="grid-item right">
-            <Preview />
+            <Preview :message="fetchedMessage" />
         </div>
     </div>
     <Footer />
 </template>
 
 <script>
-import Selector from '../components/selector.vue';
+import Selector from '../components/dropdown.vue';
 import Share from '../components/share.vue';
 import Preview from '../components/preview.vue';
 import Footer from '../components/footer.vue';
@@ -22,9 +22,15 @@ export default {
     name: "HomeView",
     data() {
         return {
+            fetchedMessage: ""
         };
     },
-    components: { Selector, Share, Preview, Footer }
+    components: { Selector, Share, Preview, Footer },
+    methods: {
+        dataFetched(text) {
+            this.fetchedMessage = text;
+        }
+    }
 }
 
 </script>
@@ -62,8 +68,8 @@ select {
     text-align: center;
     margin-top: 1%;
     display: flex;
-    justify-content: space-between;
     flex-direction: column;
+    justify-content: space-around;
 }
 
 .right {

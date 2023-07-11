@@ -1,5 +1,5 @@
 <template>
-    <footer id="footer">
+    <footer>
         <div class="container-fluid footer">
             <div class="col-md-12">
                 <center>
@@ -8,7 +8,7 @@
                     <a class="btn" href="https://www.linkedin.com/in/seda-n-taskan/" role="button" target="_blank"><i
                             class="fa fa-linkedin"></i></a>
                     <a class="btn" href="https://www.raquun.com/" target="_blank"><i>raquun.com</i></a>
-                    <a class="btn" href="https://github.com/imtribute12/Raquun" target="_blank">CoTor © 2023</a>
+                    <a class="btn" href="https://github.com/imtribute12/CoTor" target="_blank">CoTor © 2023</a>
                 </center>
             </div>
         </div>
@@ -29,12 +29,13 @@ export default {
     background-color: crimson;
     color: white !important;
     text-align: center;
-    position: fixed;
+    position: sticky;
     bottom: 0;
     width: 100%;
     height: 8%;
     display: flex;
     justify-content: space-around;
     flex-direction: column;
+    margin-bottom: 0px;
 }
 </style>

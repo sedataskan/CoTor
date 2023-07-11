@@ -1,28 +1,32 @@
 <template>
-    <div id="app" class="dropdown">
-        <select v-model="selected">
-            <option v-for="option in options" v-bind:value="option.value">
-                {{ option.text }}
-            </option>
-        </select>
+    <div>
+        <h5><i>Selector</i></h5>
+        <div class="dropdown">
+            <select v-model="selected">
+                <option v-for="option in options" v-bind:value="option.value">
+                    {{ option.text }}
+                </option>
+            </select>
 
-        <button @click="selected = ''" type="button" class="btn btn-outline-danger clear"><i class="fa fa-trash"></i>
-        </button>
-
-        <button @click="getPost(selected)" type="submit" class="btn btn-danger button" value={{selected}}>Generate</button>
+            <button @click="selected = null" type="button" class="btn btn-outline-danger clear"><i class="fa fa-trash"></i>
+            </button>
+            <loading :selected="selected" @data-fetched="dataFetched" />
+        </div>
+        <br>
+        <i> Selected: {{ selected }} </i>
     </div>
-    <br>
-    <i> Selected: {{ selected }} </i>
 </template>
 
 <script>
-import axios from 'axios';
+
+import Loading from './loading.vue';
 
 export default {
     name: 'dropdown',
+    emits: ['data-fetched'],
     data() {
         return {
-            selected: "",
+            selected: null,
             options: [
                 { text: "Kurban Bayramı", value: "Kurban Bayramı" },
                 { text: "Ramazan Bayramı", value: "Ramazan Bayramı" },
@@ -43,21 +47,12 @@ export default {
             ]
         }
     },
+    components: {
+        Loading
+    },
     methods: {
-        async getPost() {
-            axios.post('http://127.0.0.1:3000/generate', {
-                selected: this.selected
-            })
-                .then(function (response) {
-                    console.log(response);
-                    document.getElementById('generated').value = response.data.message;
-                })
-                .catch(function (error) {
-                    document.getElementById('generated').value = error.text;
-                    console.log(error);
-                });
-
-
+        dataFetched(text) {
+            this.$emit("data-fetched", text);
         }
     }
 }
