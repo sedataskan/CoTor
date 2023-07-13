@@ -2,7 +2,7 @@
     <div class="grid-container">
         <div class="grid-item left">
             <Selector @data-fetched="dataFetched" />
-            <Share />
+            <Share :message="fetchedMessage" />
         </div>
         <div class="grid-item right">
             <Preview :message="fetchedMessage" />
@@ -62,6 +62,7 @@ select {
     padding: 10px;
     margin: 1%;
     text-align: center;
+    height: 100%;
 }
 
 .left {
