@@ -25,11 +25,18 @@ export default {
         message: {
             type: String,
             required: true
-        }
+        },
+        imageUrl: {
+            type: String,
+            required: true
+        },
     },
     computed: {
         shownText() {
             return this.message ?? "Generated Message...";
+        },
+        shownImage() {
+            return this.imageUrl ?? "Generated Image...";
         }
     },
     methods: {
@@ -38,6 +45,8 @@ export default {
             axios.post("http://127.0.0.1:3000/post", {
                 accessToken: this.token,
                 body: this.shownText,
+                title: "this.shownText",
+                imageUrl: this.shownImage
             })
                 .then((response) => {
                     console.log("Post başarıyla gönderildi:", response.data);
@@ -48,8 +57,7 @@ export default {
                 .finally(() => {
                     console.log("Post gönderme isteği tamamlandı.");
                 });
-        }
-
+        },
     }
 }
 </script>

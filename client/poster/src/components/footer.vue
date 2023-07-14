@@ -28,14 +28,17 @@ export default {
 .footer {
     background-color: crimson;
     color: white !important;
-    text-align: center;
-    position: sticky;
-    bottom: 0;
-    width: 100%;
-    height: 8%;
     display: flex;
     justify-content: space-around;
     flex-direction: column;
     margin-bottom: 0px;
+    position: static;
+    height: 8%;
+    font-size: 15px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
 }
 </style>

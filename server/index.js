@@ -75,6 +75,7 @@ app.post("/post", async function (req, res) {
   const postData = {
     title: req.body.title,
     body: req.body.body,
+    imageUrl: req.body.imageUrl,
   };
 
   getUserId(ACCESS_TOKEN)
@@ -105,6 +106,19 @@ function publish(accessToken, userId, postData) {
           text: postData.body,
         },
         shareMediaCategory: "NONE",
+        // shareMediaCategory: "IMAGE",
+        // media: [
+        //   {
+        //     status: "READY",
+        //     description: {
+        //       text: "Center stage!",
+        //     },
+        //     media: "urn:li:digitalmediaAsset:" + postData.imageUrl,
+        //     title: {
+        //       text: "LinkedIn Talent Connect 2021",
+        //     },
+        //   },
+        // ],
       },
     },
     visibility: {

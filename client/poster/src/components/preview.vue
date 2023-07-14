@@ -38,7 +38,7 @@ export default {
     },
     computed: {
         shownText() {
-            return this.message ?? "Generated Message will appear here...";
+            return this.message ?? "Something went wrong...";
         },
         shownImage() {
             return this.imageUrl ?? "https://user-images.githubusercontent.com/47315479/81145216-7fbd8700-8f7e-11ea-9d49-bd5fb4a888f1.png";
@@ -85,5 +85,26 @@ export default {
     text-align: left;
     margin-left: 1%;
     margin-bottom: 1%;
+}
+
+@media screen and (max-width: 600px) {
+    .img {
+        height: 30px;
+        width: 30px;
+    }
+
+    .username,
+    .label {
+        font-size: 10px;
+    }
+
+    .text {
+        font-size: 14px;
+    }
+
+    .image {
+        max-width: 100%;
+        max-height: 300px;
+    }
 }
 </style>
