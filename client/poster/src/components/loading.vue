@@ -16,7 +16,7 @@ import axios from 'axios';
 
 export default {
     name: 'loading',
-    emits: ['data-fetched'],
+    emits: ['data-fetched', 'image-fetched'],
     data() {
         return {
             isLoading: false,
@@ -45,6 +45,15 @@ export default {
                 .finally(() => {
                     this.isLoading = false; // close loading screen
                 });
+            axios.post('http://127.0.0.1:3000/photo', {
+                selected: this.selected
+            })
+                .then((response) => {
+                    this.$emit("image-fetched", response.data.imageUrl);
+                })
+                .catch((error) => {
+                    this.$emit("image-fetched", error.message);
+                })
         },
 
     }

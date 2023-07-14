@@ -6,6 +6,7 @@ require("dotenv").config();
 const { Configuration, OpenAIApi } = require("openai");
 const session = require("express-session");
 const request = require("request");
+const axios = require("axios");
 // CORS
 app.use(cors());
 
@@ -150,3 +151,31 @@ function getUserId(access_token) {
     );
   });
 }
+
+// ---------------unsplash part----------------
+app.post("/photo", async (req, res) => {
+  var date = JSON.stringify(req.body);
+  const prompt = date.slice(12, date.length - 1);
+  console.log(prompt);
+
+  const apiKey = process.env.UNSPLASH_ACCESS_KEY; // Unsplash API anahtarınızı buraya girin
+  const apiUrl = `https://api.unsplash.com/photos/random?client_id=${apiKey}`;
+
+  try {
+    const response = await axios.get(apiUrl);
+    const imageUrl = response.data.urls.raw;
+    console.log(imageUrl);
+    console.log(typeof imageUrl);
+
+    return res.status(200).json({
+      success: true,
+      imageUrl: imageUrl,
+    });
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).json({
+      success: false,
+      imageUrl: null,
+    });
+  }
+});

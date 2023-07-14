@@ -88,6 +88,7 @@ Start the server
 | "express-session": "^1.17.3" | [npmjs.com/package/express-session](https://www.npmjs.com/package/express-session)         |
 | "request": "^2.88.2"         | [npmjs.com/package/request](https://www.npmjs.com/package/request)                         |
 | "body-parser": "^1.20.2"     | [npmjs.com/package/body-parser](https://www.npmjs.com/package/body-parser)                 |
+| "axios": "^1.4.0"            | [npmjs.com/package/axios](https://www.npmjs.com/package/axios)                             |
 
 ## Api
 

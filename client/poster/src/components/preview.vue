@@ -3,7 +3,7 @@
         <h5> <i>Preview</i> </h5>
 
         <div class="post">
-            <img :src="imageUrl" class="img">
+            <img :src="avatar" class="img">
             <p class="username"> Company Name </p>
             <p class="label"> 07.10.2023 </p>
         </div>
@@ -11,7 +11,7 @@
         <div class="text"> {{ shownText }} </div>
         <br>
         <div>
-            <img src="https://via.placeholder.com/600" alt="Generated Image" width="500" height="500">
+            <img :src=shownImage width="500" height="500">
         </div>
     </div>
 </template>
@@ -24,16 +24,24 @@ export default {
         message: {
             type: String,
             required: true
+        },
+        imageUrl: {
+            type: String,
+            required: true
         }
     },
     data() {
         return {
-            imageUrl: "https://cdn-icons-png.flaticon.com/512/44/44948.png?w=740&t=st=1689073293~exp=1689073893~hmac=e5fa93103e45bc05deda27d257b470cdaecf7aba1f75880621d7fba63e608ac2",
+            // imageUrl: "https://user-images.githubusercontent.com/47315479/81145216-7fbd8700-8f7e-11ea-9d49-bd5fb4a888f1.png",
+            avatar: "https://cdn-icons-png.flaticon.com/512/44/44948.png?w=740&t=st=1689073293~exp=1689073893~hmac=e5fa93103e45bc05deda27d257b470cdaecf7aba1f75880621d7fba63e608ac2",
         };
     },
     computed: {
         shownText() {
             return this.message ?? "Generated Message will appear here...";
+        },
+        shownImage() {
+            return this.imageUrl ?? "https://user-images.githubusercontent.com/47315479/81145216-7fbd8700-8f7e-11ea-9d49-bd5fb4a888f1.png";
         }
     }
 }

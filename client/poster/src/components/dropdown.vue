@@ -8,9 +8,10 @@
                 </option>
             </select>
 
-            <button @click="selected = null" type="button" class="btn btn-outline-danger clear"><i class="fa fa-trash"></i>
+            <button @click="selected = null" :disabled="selected == null" type="button"
+                class="btn btn-outline-danger clear"><i class="fa fa-trash"></i>
             </button>
-            <loading :selected="selected" @data-fetched="dataFetched" />
+            <loading :selected="selected" @data-fetched="dataFetched" @image-fetched="imageFetched" />
         </div>
         <br>
         <i> Selected: {{ selected }} </i>
@@ -23,7 +24,7 @@ import Loading from './loading.vue';
 
 export default {
     name: 'dropdown',
-    emits: ['data-fetched'],
+    emits: ['data-fetched', 'image-fetched'],
     data() {
         return {
             selected: null,
@@ -53,6 +54,9 @@ export default {
     methods: {
         dataFetched(text) {
             this.$emit("data-fetched", text);
+        },
+        imageFetched(image) {
+            this.$emit("image-fetched", image);
         }
     }
 }

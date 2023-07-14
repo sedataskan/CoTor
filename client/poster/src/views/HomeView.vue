@@ -1,11 +1,11 @@
 <template>
     <div class="grid-container">
         <div class="grid-item left">
-            <Selector @data-fetched="dataFetched" />
-            <Share :message="fetchedMessage" />
+            <Selector @data-fetched="dataFetched" @image-fetched="imageFetched" />
+            <Share :message="fetchedMessage" :imageUrl="fetchedImage" />
         </div>
         <div class="grid-item right">
-            <Preview :message="fetchedMessage" />
+            <Preview :message="fetchedMessage" :imageUrl="fetchedImage" />
         </div>
     </div>
     <Footer />
@@ -22,13 +22,17 @@ export default {
     name: "HomeView",
     data() {
         return {
-            fetchedMessage: ""
+            fetchedMessage: "",
+            fetchedImage: ""
         };
     },
     components: { Selector, Share, Preview, Footer },
     methods: {
         dataFetched(text) {
             this.fetchedMessage = text;
+        },
+        imageFetched(image) {
+            this.fetchedImage = image;
         }
     }
 }
