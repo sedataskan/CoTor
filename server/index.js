@@ -33,7 +33,7 @@ app.post("/generate", async (req, res) => {
   const prompt =
     "bana " +
     date.slice(12, date.length - 1) +
-    " ile ilgili 200 karakterlik sosyal medya postu oluştur.";
+    " ile ilgili Türkçe, 200 karakterlik sosyal medya postu oluştur.";
   console.log(prompt);
   try {
     if (prompt == null) {
@@ -44,7 +44,6 @@ app.post("/generate", async (req, res) => {
       messages: [{ role: "user", content: prompt }],
     });
     completion = response.data.choices[0].message.content;
-    console.log(prompt, completion);
     return res.status(200).json({
       success: true,
       message: completion,
@@ -159,14 +158,17 @@ app.post("/photo", async (req, res) => {
   console.log(prompt);
 
   const apiKey = process.env.UNSPLASH_ACCESS_KEY; // Unsplash API anahtarınızı buraya girin
-  const apiUrl = `https://api.unsplash.com/photos/random?client_id=${apiKey}`;
+  // const apiUrl = `https://api.unsplash.com/photos/random?client_id=${apiKey}`;
+  const getId = `https://api.unsplash.com/search/photos?query=${prompt}&client_id=${apiKey}`;
+
+  const response = await axios.get(getId);
+  const imageId = response.data.results[0].id; // İlk sonuçtan imageId'yi alın
+
+  const apiUrl = `https://api.unsplash.com/photos/${imageId}?client_id=${apiKey}`;
 
   try {
     const response = await axios.get(apiUrl);
     const imageUrl = response.data.urls.raw;
-    console.log(imageUrl);
-    console.log(typeof imageUrl);
-
     return res.status(200).json({
       success: true,
       imageUrl: imageUrl,

@@ -11,7 +11,7 @@
         <div class="text"> {{ shownText }} </div>
         <br>
         <div>
-            <img :src=shownImage width="500" height="500">
+            <img :src=shownImage style="max-width: 600px; max-height: 700px">
         </div>
     </div>
 </template>
