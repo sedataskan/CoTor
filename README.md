@@ -96,3 +96,4 @@ Start the server
 | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | OpenAI API            | [openai.com/product](https://openai.com/product)                                                                                       |
 | Share on LinkedIn API | [learn.microsoft.com/share-on-linkedin](https://learn.microsoft.com/en-us/linkedin/consumer/integrations/self-serve/share-on-linkedin) |
+| Unsplash API          | [unsplash.com/documentation](https://unsplash.com/documentation#search-photos)                                                         |
