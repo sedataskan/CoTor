@@ -12,8 +12,6 @@
         <br>
         <div>
             <img v-bind:src=baseImage style="max-width: 600px; max-height: 700px">
-            <!-- <button @click=updateImageUrl(imageUrl) class="btn btn-secondary" style="font-size: 20px" type="submit">
-                Update Image <i class="fa fa-refresh"></i> </button> -->
         </div>
     </div>
 </template>
