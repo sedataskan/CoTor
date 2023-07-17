@@ -58,8 +58,9 @@ app.post("/generate", async (req, res) => {
 
 //------------linkedin part----------------
 
-const clientSecret = process.env.LINKEDIN_API_KEY;
-const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
+var clientSecret = process.env.LINKEDIN_API_KEY;
+var ACCESS_TOKEN = process.env.ACCESS_TOKEN;
+var userId = "";
 
 app.set("view engine", "ejs");
 app.use(
@@ -79,7 +80,7 @@ app.post("/post", async function (req, res) {
 
   getUserId(ACCESS_TOKEN)
     .then((user) => {
-      const userId = JSON.parse(user).id;
+      userId = JSON.parse(user).id;
       publish(ACCESS_TOKEN, userId, postData)
         .then((result) => {
           res.send(result);
@@ -124,6 +125,7 @@ function publish(accessToken, userId, postData) {
       "com.linkedin.ugc.MemberNetworkVisibility": "PUBLIC",
     },
   };
+
   return new Promise((resolve, reject) => {
     request.post(
       "https://api.linkedin.com/v2/ugcPosts",
@@ -170,7 +172,6 @@ app.post("/photo", async (req, res) => {
   const prompt = date.slice(12, date.length - 1);
 
   const apiKey = process.env.UNSPLASH_ACCESS_KEY; // Unsplash API anahtarınızı buraya girin
-  // const apiUrl = `https://api.unsplash.com/photos/random?client_id=${apiKey}`;
   const getId = `https://api.unsplash.com/search/photos?query=${prompt}&client_id=${apiKey}`;
 
   const response = await axios.get(getId);

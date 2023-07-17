@@ -11,7 +11,9 @@
         <div class="text"> {{ shownText }} </div>
         <br>
         <div>
-            <img :src=shownImage style="max-width: 600px; max-height: 700px">
+            <img v-bind:src=baseImage style="max-width: 600px; max-height: 700px">
+            <!-- <button @click=updateImageUrl(imageUrl) class="btn btn-secondary" style="font-size: 20px" type="submit">
+                Update Image <i class="fa fa-refresh"></i> </button> -->
         </div>
     </div>
 </template>
@@ -32,7 +34,7 @@ export default {
     },
     data() {
         return {
-            // imageUrl: "https://user-images.githubusercontent.com/47315479/81145216-7fbd8700-8f7e-11ea-9d49-bd5fb4a888f1.png",
+            baseImage: "https://user-images.githubusercontent.com/47315479/81145216-7fbd8700-8f7e-11ea-9d49-bd5fb4a888f1.png",
             avatar: "https://cdn-icons-png.flaticon.com/512/44/44948.png?w=740&t=st=1689073293~exp=1689073893~hmac=e5fa93103e45bc05deda27d257b470cdaecf7aba1f75880621d7fba63e608ac2",
         };
     },
@@ -42,6 +44,16 @@ export default {
         },
         shownImage() {
             return this.imageUrl;
+        }
+    },
+    watch: {
+        imageUrl(newImageUrl) {
+            this.updateImageUrl(newImageUrl);
+        }
+    },
+    methods: {
+        updateImageUrl(imageUrl) {
+            this.baseImage = imageUrl;
         }
     }
 }
