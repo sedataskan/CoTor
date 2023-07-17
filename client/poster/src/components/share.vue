@@ -8,6 +8,7 @@
                 <button @click="redirectToLinkedIn" class="btn btn-secondary" style="font-size: 20px" type="submit">
                     LinkedIn <i class="fa fa-linkedin-square"></i>
                 </button>
+                <div v-if="successMessage" class="message"><i> {{ successMessage }} </i></div>
             </center>
         </div>
     </div>
@@ -18,7 +19,9 @@ import axios from 'axios';
 export default {
     name: "Share",
     data() {
-        return {};
+        return {
+            successMessage: "",
+        };
 
     },
     props: {
@@ -49,9 +52,11 @@ export default {
                 imageUrl: this.shownImage
             })
                 .then((response) => {
+                    this.successMessage = "Posted Successfully!";
                     console.log("Post başarıyla gönderildi:", response.data);
                 })
                 .catch((error) => {
+                    this.successMessage = "Something went wrong...";
                     console.error("Post gönderme hatasi:", error);
                 })
                 .finally(() => {
@@ -61,3 +66,12 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.message {
+    color: green;
+    font-weight: bold;
+    text-align: center;
+    margin: 2%;
+}
+</style>

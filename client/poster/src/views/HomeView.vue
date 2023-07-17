@@ -81,7 +81,21 @@ select {
     text-align: center;
     margin-top: 1%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-direction: column;
+}
+
+@media screen and (max-width: 1000px) {
+    .grid-container {
+        display: inline-block;
+    }
+
+    .left {
+        width: 100%;
+    }
+
+    .right {
+        width: 100%;
+    }
 }
 </style>

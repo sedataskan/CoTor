@@ -34,7 +34,6 @@ app.post("/generate", async (req, res) => {
     "bana " +
     date.slice(12, date.length - 1) +
     " ile ilgili Türkçe, 200 karakterlik sosyal medya postu oluştur.";
-  console.log(prompt);
   try {
     if (prompt == null) {
       throw new Error("Uh oh, no prompt was provided");
@@ -169,7 +168,6 @@ function getUserId(access_token) {
 app.post("/photo", async (req, res) => {
   var date = JSON.stringify(req.body);
   const prompt = date.slice(12, date.length - 1);
-  console.log(prompt);
 
   const apiKey = process.env.UNSPLASH_ACCESS_KEY; // Unsplash API anahtarınızı buraya girin
   // const apiUrl = `https://api.unsplash.com/photos/random?client_id=${apiKey}`;
@@ -191,7 +189,8 @@ app.post("/photo", async (req, res) => {
     console.log(error.message);
     return res.status(500).json({
       success: false,
-      imageUrl: null,
+      imageUrl:
+        "https://user-images.githubusercontent.com/47315479/81145216-7fbd8700-8f7e-11ea-9d49-bd5fb4a888f1.png",
     });
   }
 });
