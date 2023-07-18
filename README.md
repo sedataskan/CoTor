@@ -85,10 +85,10 @@ Start the server
 | "cors": "^2.8.5"             | [pmjs.com/package/cors](https://www.npmjs.com/package/cors)                                |
 | "dotenv": "^16.3.1"          | [npmjs.com/package/dotenv](https://www.npmjs.com/package/dotenv)                           |
 | "openai": "^3.3.0"           | [npmjs.com/package/openai](https://www.npmjs.com/package/openai)                           |
-| "express-session": "^1.17.3" | [npmjs.com/package/express-session](https://www.npmjs.com/package/express-session)         |
 | "request": "^2.88.2"         | [npmjs.com/package/request](https://www.npmjs.com/package/request)                         |
 | "body-parser": "^1.20.2"     | [npmjs.com/package/body-parser](https://www.npmjs.com/package/body-parser)                 |
 | "axios": "^1.4.0"            | [npmjs.com/package/axios](https://www.npmjs.com/package/axios)                             |
+| "uuid": "^9.0.0"             | [npmjs.com/package/uuid](https://www.npmjs.com/package/uuid)                               |
 
 ## Api
 

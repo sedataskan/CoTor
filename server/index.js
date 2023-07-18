@@ -4,9 +4,11 @@ const port = 3000;
 const cors = require("cors");
 require("dotenv").config();
 const { Configuration, OpenAIApi } = require("openai");
-const session = require("express-session");
 const request = require("request");
 const axios = require("axios");
+const fs = require("fs");
+const { v4: uuidv4 } = require("uuid");
+
 // CORS
 app.use(cors());
 
@@ -58,18 +60,7 @@ app.post("/generate", async (req, res) => {
 
 //------------linkedin part----------------
 
-var clientSecret = process.env.LINKEDIN_API_KEY;
 var ACCESS_TOKEN = process.env.ACCESS_TOKEN;
-var userId = "";
-
-app.set("view engine", "ejs");
-app.use(
-  session({
-    resave: false,
-    saveUninitialized: true,
-    secret: clientSecret,
-  })
-);
 
 app.post("/post", async function (req, res) {
   const postData = {
@@ -80,14 +71,34 @@ app.post("/post", async function (req, res) {
 
   getUserId(ACCESS_TOKEN)
     .then((user) => {
-      userId = JSON.parse(user).id;
-      publish(ACCESS_TOKEN, userId, postData)
-        .then((result) => {
-          res.send(result);
+      const userId = JSON.parse(user).id;
+      registerImage(userId, ACCESS_TOKEN)
+        .then((registerUpload) => {
+          const assetId = JSON.parse(registerUpload).value.asset;
+          uploadImage(
+            postData.imageUrl,
+            JSON.parse(registerUpload).value.uploadMechanism[
+              "com.linkedin.digitalmedia.uploading.MediaUploadHttpRequest"
+            ].uploadUrl,
+            ACCESS_TOKEN
+          )
+            .then((path) => {
+              publish(ACCESS_TOKEN, userId, postData, assetId)
+                .then((result) => {
+                  deleteImage(path);
+                  res.send(result);
+                })
+                .catch((err) => {
+                  console.log("err", err);
+                  res.status(500).json(err);
+                });
+            })
+            .catch((err) => {
+              console.log("err2", err);
+            });
         })
         .catch((err) => {
-          console.log("err", err);
-          res.status(500).json(err);
+          console.log("err1", err);
         });
     })
     .catch((err) => {
@@ -96,7 +107,90 @@ app.post("/post", async function (req, res) {
     });
 });
 
-function publish(accessToken, userId, postData) {
+function registerImage(userId, access_token) {
+  const body = {
+    registerUploadRequest: {
+      recipes: ["urn:li:digitalmediaRecipe:feedshare-image"],
+      owner: "urn:li:person:" + userId,
+      serviceRelationships: [
+        {
+          relationshipType: "OWNER",
+          identifier: "urn:li:userGeneratedContent",
+        },
+      ],
+    },
+  };
+  return new Promise((resolve, reject) => {
+    request.post(
+      "https://api.linkedin.com/v2/assets?action=registerUpload",
+      {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+        body: JSON.stringify(body),
+      },
+      function (err, response, body) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(body);
+        }
+      }
+    );
+  });
+}
+
+function uploadImage(imageUrl, uploadUrl, accessToken) {
+  return new Promise((resolve, reject) => {
+    const path = uuidv4() + ".jpeg";
+    downloadImage(imageUrl, path).then((_) => {
+      const fileData = fs.readFileSync(path);
+      request.post(
+        uploadUrl,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/octet-stream",
+          },
+          body: fileData,
+        },
+        function (err, response, body) {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(path);
+          }
+        }
+      );
+    });
+  });
+}
+
+function deleteImage(path) {
+  fs.unlink(path, (err) => {
+    if (err) {
+      console.log("Error deleting image!");
+    }
+    console.log("Image deleted successfully!");
+  });
+}
+
+async function downloadImage(url, filename) {
+  return new Promise(async (resolve, reject) => {
+    const response = await axios.get(url, { responseType: "arraybuffer" });
+
+    fs.writeFile(filename, response.data, (err) => {
+      if (err) {
+        console.log("Error downloading image!");
+        reject(err);
+      }
+      console.log("Image downloaded successfully!");
+      resolve();
+    });
+  });
+}
+
+function publish(accessToken, userId, postData, assetId) {
   const body = {
     author: "urn:li:person:" + userId,
     lifecycleState: "PUBLISHED",
@@ -105,20 +199,19 @@ function publish(accessToken, userId, postData) {
         shareCommentary: {
           text: postData.body,
         },
-        shareMediaCategory: "NONE",
-        // shareMediaCategory: "IMAGE",
-        // media: [
-        //   {
-        //     status: "READY",
-        //     description: {
-        //       text: "Center stage!",
-        //     },
-        //     media: "urn:li:digitalmediaAsset:" + postData.imageUrl,
-        //     title: {
-        //       text: "LinkedIn Talent Connect 2021",
-        //     },
-        //   },
-        // ],
+        shareMediaCategory: "IMAGE",
+        media: [
+          {
+            status: "READY",
+            description: {
+              text: "Center stage!",
+            },
+            media: assetId,
+            title: {
+              text: "LinkedIn Talent Connect 2021",
+            },
+          },
+        ],
       },
     },
     visibility: {
