@@ -7,6 +7,8 @@
         <div class="grid-item right">
             <Preview :message="fetchedMessage" :imageUrl="fetchedImage" />
         </div>
+        <div class="grid-item">
+        </div>
     </div>
     <Footer />
 </template>
