@@ -33,18 +33,18 @@ export default {
                 { text: "Eid al-Fitr", value: "Eid al-Fitr" },
                 { text: "Mother's Day", value: "Mother's Day" },
                 { text: "Father's Day", value: "Father's Day" },
-                { text: "January 1 | New Year's Day", value: "January 1 | New Year's Day" },
-                { text: "March 4 | Engineers' Day", value: "March 4 | Engineers' Day" },
-                { text: "March 8 | International Women's Day", value: "March 8 | International Women's Day" },
-                { text: "March 18 | Gallipoli Victory Day", value: "March 18 | Gallipoli Victory Day" },
-                { text: "April 23 | National Sovereignty and Children's Day", value: "April 23 | National Sovereignty and Children's Day" },
-                { text: "May 1 | Labor and Solidarity Day", value: "May 1 | Labor and Solidarity Day" },
-                { text: "May 19 | Commemoration of Atatürk, Youth and Sports Day", value: "May 19 | Commemoration of Atatürk, Youth and Sports Day" },
-                { text: "July 15 | Democracy and National Unity Day", value: "July 15 | Democracy and National Unity Day" },
-                { text: "August 30 | Victory Day", value: "August 30 | Victory Day" },
-                { text: "October 29 | Republic Day", value: "October 29 | Republic Day" },
-                { text: "November 10 | Commemoration of Atatürk's Death", value: "November 10 | Commemoration of Atatürk's Death" },
-                { text: "November 24 | Teachers' Day", value: "November 24 | Teachers' Day" }
+                { text: "January 1 | New Year's Day", value: "New Year's Day" },
+                { text: "March 4 | Engineers' Day", value: "Engineers' Day" },
+                { text: "March 8 | International Women's Day", value: "Women's Day" },
+                { text: "March 18 | Gallipoli Victory Day", value: "Gallipoli Victory Day" },
+                { text: "April 23 | National Sovereignty and Children's Day", value: "Children's Day" },
+                { text: "May 1 | Labor and Solidarity Day", value: "Labor and Solidarity Day" },
+                { text: "May 19 | Commemoration of Atatürk, Youth and Sports Day", value: "Commemoration of Atatürk, Youth and Sports Day" },
+                { text: "July 15 | Democracy and National Unity Day", value: "Democracy and National Unity Day" },
+                { text: "August 30 | Victory Day", value: "Victory Day" },
+                { text: "October 29 | Republic Day", value: "Republic Day" },
+                { text: "November 10 | Commemoration of Atatürk's Death", value: "Atatürk's Death" },
+                { text: "November 24 | Teachers' Day", value: "Teachers' Day" }
             ]
 
         }
