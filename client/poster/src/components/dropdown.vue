@@ -38,11 +38,11 @@ export default {
                 { text: "March 8 | International Women's Day", value: "Women's Day" },
                 { text: "March 18 | Gallipoli Victory Day", value: "Gallipoli Victory Day" },
                 { text: "April 23 | National Sovereignty and Children's Day", value: "Children's Day" },
-                { text: "May 1 | Labor and Solidarity Day", value: "Labor and Solidarity Day" },
+                { text: "May 1 | Labor and Solidarity Day", value: "Solidarity Day" },
                 { text: "May 19 | Commemoration of Atatürk, Youth and Sports Day", value: "Commemoration of Atatürk, Youth and Sports Day" },
-                { text: "July 15 | Democracy and National Unity Day", value: "Democracy and National Unity Day" },
-                { text: "August 30 | Victory Day", value: "Victory Day" },
-                { text: "October 29 | Republic Day", value: "Republic Day" },
+                { text: "July 15 | Democracy and National Unity Day", value: "Turkey's Democracy and National Unity Day" },
+                { text: "August 30 | Victory Day", value: "Turkey's Victory Day" },
+                { text: "October 29 | Republic Day", value: "Turkey's Republic Day" },
                 { text: "November 10 | Commemoration of Atatürk's Death", value: "Atatürk's Death" },
                 { text: "November 24 | Teachers' Day", value: "Teachers' Day" }
             ]
