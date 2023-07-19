@@ -80,13 +80,14 @@ Start the server
 
 | Package                      | Link                                                                                       |
 | ---------------------------- | ------------------------------------------------------------------------------------------ |
+| Frontend Packages            |
 | "bootstrap": "^5.3.0"        | [getbootstrap.com](https://getbootstrap.com/)                                              |
 | "pinia": "^2.1.3"            | [pinia.vuejs.org](https://pinia.vuejs.org/)                                                |
 | "vue": "^3.3.4"              | [vuejs.org](https://vuejs.org/)                                                            |
 | "vue-router": "^4.2.2"       | [router.vuejs.org](https://router.vuejs.org/)                                              |
 | "vue-loading-overlay": "6.0" | [npmjs.com/package/vue-loading-overlay](https://www.npmjs.com/package/vue-loading-overlay) |
 | "axios": "^1.4.0"            | [npmjs.com/package/axios](https://www.npmjs.com/package/axios)                             |
-|                              |                                                                                            |
+| Backend Packages             |                                                                                            |
 | "express": "^4.18.2"         | [npmjs.com/package/express](https://www.npmjs.com/package/express)                         |
 | "nodemon": "^2.0.22"         | [npmjs.com/package/nodemon](https://www.npmjs.com/package/nodemon)                         |
 | "cors": "^2.8.5"             | [npmjs.com/package/cors](https://www.npmjs.com/package/cors)                               |
