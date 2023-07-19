@@ -59,6 +59,18 @@ select {
     background-color: #f1f1f1;
 }
 
+hr {
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+    color: crimson;
+    width: 100%;
+}
+
 .grid-container {
     display: grid;
     grid-template-columns: 50% 50%;
@@ -71,32 +83,19 @@ select {
     height: 100%;
 }
 
-.left {
-    text-align: center;
-    margin-top: 1%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-}
-
+.left,
 .right {
     text-align: center;
     margin-top: 1%;
     display: flex;
-    justify-content: space-around;
     flex-direction: column;
+    justify-content: space-around;
 }
+
 
 @media screen and (max-width: 1000px) {
     .grid-container {
         display: inline-block;
-    }
-
-    .left {
-        width: 100%;
-    }
-
-    .right {
         width: 100%;
     }
 }

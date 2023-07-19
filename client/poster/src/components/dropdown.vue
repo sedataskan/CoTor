@@ -14,7 +14,7 @@
             <loading :selected="selected" @data-fetched="dataFetched" @image-fetched="imageFetched" />
         </div>
         <br>
-        <i> Selected: {{ selected }} </i>
+        <!-- <i> Selected: {{ selected }} </i> -->
     </div>
 </template>
 

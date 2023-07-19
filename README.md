@@ -18,11 +18,18 @@
 - LinkedIn Sharing: Users can easily share the created content from their LinkedIn accounts. This feature allows content to reach a wider audience on social media platforms.
 - User-Friendly Interface: The user interface of CoTor is designed in an intuitive way, allowing users to use the application easily.
 
-## UI
+## Demo
+
+<p align="center">
+  <img src="assets/demo.gif" >
+
+</p>
+
+<!-- ## UI
 
 <p align="center">
   <img src="/assets/ui.png" >
-</p>
+</p> -->
 
 ## Technologies
 

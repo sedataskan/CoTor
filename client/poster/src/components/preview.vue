@@ -5,11 +5,11 @@
 
         <div class="post">
             <img :src="avatar" class="img">
-            <p class="username"> Company Name </p>
+            <p class="username"> CoTor </p>
             <p class="label"> 07.10.2023 </p>
         </div>
 
-        <div class="text"> {{ shownText }} </div>
+        <div class="text" v-bind:src=baseMessage> {{ baseMessage }}</div>
         <br>
         <div>
             <img v-bind:src=baseImage style="max-width: 600px; max-height: 700px">
@@ -33,6 +33,7 @@ export default {
     },
     data() {
         return {
+            baseMessage: "This is a preview of your post.",
             baseImage: "https://user-images.githubusercontent.com/47315479/81145216-7fbd8700-8f7e-11ea-9d49-bd5fb4a888f1.png",
             avatar: "https://cdn-icons-png.flaticon.com/512/44/44948.png?w=740&t=st=1689073293~exp=1689073893~hmac=e5fa93103e45bc05deda27d257b470cdaecf7aba1f75880621d7fba63e608ac2",
         };
@@ -48,11 +49,17 @@ export default {
     watch: {
         imageUrl(newImageUrl) {
             this.updateImageUrl(newImageUrl);
+        },
+        message(newMessage) {
+            this.updateMessage(newMessage);
         }
     },
     methods: {
         updateImageUrl(imageUrl) {
             this.baseImage = imageUrl;
+        },
+        updateMessage(message) {
+            this.baseMessage = message;
         }
     }
 }
@@ -99,8 +106,7 @@ hr {
 
 .text {
     text-align: left;
-    margin-left: 1%;
-    margin-bottom: 1%;
+    margin: 1%;
 }
 
 @media screen and (max-width: 1000px) {
