@@ -28,7 +28,7 @@ export default {
 .footer {
     background-color: crimson;
     color: white !important;
-    display: flex;
+    display: block;
     justify-content: space-around;
     flex-direction: column;
     margin-bottom: 0px;
