@@ -82,7 +82,7 @@ Start the server
 |                              |                                                                                            |
 | "express": "^4.18.2"         | [npmjs.com/package/express](https://www.npmjs.com/package/express)                         |
 | "nodemon": "^2.0.22"         | [npmjs.com/package/nodemon](https://www.npmjs.com/package/nodemon)                         |
-| "cors": "^2.8.5"             | [pmjs.com/package/cors](https://www.npmjs.com/package/cors)                                |
+| "cors": "^2.8.5"             | [npmjs.com/package/cors](https://www.npmjs.com/package/cors)                               |
 | "dotenv": "^16.3.1"          | [npmjs.com/package/dotenv](https://www.npmjs.com/package/dotenv)                           |
 | "openai": "^3.3.0"           | [npmjs.com/package/openai](https://www.npmjs.com/package/openai)                           |
 | "request": "^2.88.2"         | [npmjs.com/package/request](https://www.npmjs.com/package/request)                         |
