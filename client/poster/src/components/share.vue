@@ -1,5 +1,8 @@
 <template>
     <div>
+        <Loading :active.sync="isLoading" :is-full-page="fullPage" :transition="true" :color="'#ff1d5e'" :loader="'spinner'"
+            :height="64" :width="64" :opacity="0.5" :z-index="9999" :background="'#000000'" :container="'body'"
+            :target="'body'" />
         <hr>
         <h5><i>Share</i></h5>
         <br>
@@ -16,13 +19,20 @@
 
 <script>
 import axios from 'axios';
+import Loading from 'vue-loading-overlay';
+
 export default {
     name: "Share",
     data() {
         return {
             successMessage: "",
+            isLoading: false,
+            fullPage: true,
         };
 
+    },
+    components: {
+        Loading
     },
     props: {
         message: {
@@ -45,6 +55,7 @@ export default {
     methods: {
         //redict to linkedin
         redirectToLinkedIn() {
+            this.isLoading = true;
             axios.post("http://127.0.0.1:3000/post", {
                 accessToken: this.token,
                 body: this.shownText,
@@ -61,6 +72,7 @@ export default {
                 })
                 .finally(() => {
                     console.log("Post gönderme isteği tamamlandı.");
+                    this.isLoading = false;
                 });
         },
     }
