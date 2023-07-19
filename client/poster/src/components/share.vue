@@ -80,6 +80,10 @@ export default {
 </script>
 
 <style scoped>
+hr {
+    color: crimson;
+}
+
 .message {
     color: green;
     font-weight: bold;

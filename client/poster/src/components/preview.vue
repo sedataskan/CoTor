@@ -1,5 +1,6 @@
 <template>
     <div>
+        <hr>
         <h5> <i>Preview</i> </h5>
 
         <div class="post">
@@ -58,6 +59,11 @@ export default {
 </script>
 
 <style scoped>
+hr {
+    visibility: hidden;
+    color: crimson;
+}
+
 .username {
     color: crimson;
     font-weight: bold;
@@ -97,7 +103,11 @@ export default {
     margin-bottom: 1%;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1000px) {
+    hr {
+        visibility: visible;
+    }
+
     .img {
         height: 30px;
         width: 30px;
