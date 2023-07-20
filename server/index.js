@@ -34,9 +34,9 @@ app.use(express.json());
 app.post("/generate", async (req, res) => {
   var date = JSON.stringify(req.body);
   const prompt =
-    "bana " +
+    "şirketimize " +
     date.slice(12, date.length - 1) +
-    " ile ilgili Türkçe, 200 karakterlik sosyal medya postu oluştur.";
+    ' ile ilgili Türkçe, 200 karakterlik sosyal medya postu oluştur. Resmi bir dil kullan. Türkçe harici bir dil kullanma."" kullanma';
   try {
     if (prompt == null) {
       throw new Error("Uh oh, no prompt was provided");
