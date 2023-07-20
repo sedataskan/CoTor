@@ -8,6 +8,7 @@ const request = require("request");
 const axios = require("axios");
 const fs = require("fs");
 const { v4: uuidv4 } = require("uuid");
+const Jimp = require("jimp");
 
 // CORS
 app.use(cors());
@@ -142,27 +143,65 @@ function registerImage(userId, access_token) {
 
 function uploadImage(imageUrl, uploadUrl, accessToken) {
   return new Promise((resolve, reject) => {
-    const path = uuidv4() + ".jpeg";
+    const path = uuidv4() + ".jpg";
     downloadImage(imageUrl, path).then((_) => {
-      const fileData = fs.readFileSync(path);
-      request.post(
-        uploadUrl,
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            "Content-Type": "application/octet-stream",
+      watermarkImage(path).then((_) => {
+        const fileData = fs.readFileSync(path);
+        request.post(
+          uploadUrl,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+              "Content-Type": "application/octet-stream",
+            },
+            body: fileData,
           },
-          body: fileData,
-        },
-        function (err, response, body) {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(path);
+          function (err, response, body) {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(path);
+            }
           }
-        }
-      );
+        );
+      });
     });
+  });
+}
+
+function watermarkImage(path) {
+  const logoPath = "../assets/raquun-logo.png";
+  const logo2Path = "../assets/company-logo.png";
+  return new Promise((resolve, reject) => {
+    Jimp.read(path)
+      .then(async (mainImage) => {
+        const logo = await Jimp.read(logoPath);
+        const logo2 = await Jimp.read(logo2Path);
+
+        const logoWidth = mainImage.getWidth() / 8;
+        const logoHeight = logo.getHeight() / (logo.getWidth() / logoWidth);
+        logo.resize(logoWidth, logoHeight);
+
+        const logoX = 100;
+        const logoY = mainImage.getHeight() - logo.getHeight() - 100;
+
+        const logo2Width = mainImage.getWidth() / 8;
+        const logo2Height = logo2.getHeight() / (logo2.getWidth() / logo2Width);
+        logo2.resize(logo2Width, logo2Height);
+
+        const logo2X = mainImage.bitmap.width - logo2.bitmap.width - 10;
+        const logo2Y = mainImage.getHeight() - logo2.bitmap.height / 2 - 150;
+
+        mainImage.composite(logo, logoX, logoY);
+        mainImage.composite(logo2, logo2X, logo2Y);
+        return await mainImage.writeAsync(path);
+      })
+      .then(() => {
+        resolve(path);
+      })
+      .catch((err) => {
+        reject(err);
+      });
   });
 }
 
@@ -264,11 +303,11 @@ app.post("/photo", async (req, res) => {
   var date = JSON.stringify(req.body);
   const prompt = date.slice(12, date.length - 1);
 
-  const apiKey = process.env.UNSPLASH_ACCESS_KEY; // Unsplash API anahtarınızı buraya girin
+  const apiKey = process.env.UNSPLASH_ACCESS_KEY;
   const getId = `https://api.unsplash.com/search/photos?query=${prompt}&client_id=${apiKey}`;
 
   const response = await axios.get(getId);
-  const imageId = response.data.results[0].id; // İlk sonuçtan imageId'yi alın
+  const imageId = response.data.results[0].id;
 
   const apiUrl = `https://api.unsplash.com/photos/${imageId}?client_id=${apiKey}`;
 
