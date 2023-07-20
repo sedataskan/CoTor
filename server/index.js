@@ -189,8 +189,12 @@ function watermarkImage(path) {
         const logo2Height = logo2.getHeight() / (logo2.getWidth() / logo2Width);
         logo2.resize(logo2Width, logo2Height);
 
-        const logo2X = mainImage.bitmap.width - logo2.bitmap.width - 10;
-        const logo2Y = mainImage.getHeight() - logo2.bitmap.height / 2 - 150;
+        const logo2X =
+          mainImage.getWidth() - logo2.bitmap.width + mainImage.getWidth() / 60;
+        const logo2Y =
+          mainImage.getHeight() -
+          logo2.bitmap.height +
+          mainImage.getHeight() / 27;
 
         mainImage.composite(logo, logoX, logoY);
         mainImage.composite(logo2, logo2X, logo2Y);
