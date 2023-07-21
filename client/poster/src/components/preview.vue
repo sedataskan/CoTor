@@ -9,11 +9,10 @@
             <p class="label"> 07.10.2023 </p>
         </div>
 
-        <p id="content" class="box" ref="baseMessage" contenteditable="true" @input="updateParagraph(baseMessage)">
+        <p id="content" class="box" ref="baseMessage" contenteditable="true"
+            @input="updateParagraph(baseMessage), editMessage(baseMessage)">
             {{ baseMessage }}
         </p>
-
-        <button class="ok-button" @click="editMessage(baseMessage)"><i class="fa fa-check" aria-hidden="true"></i></button>
         <div>
             <img v-bind:src=baseImage style="max-width: 600px; max-height: 700px">
         </div>
