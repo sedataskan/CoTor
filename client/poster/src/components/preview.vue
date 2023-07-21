@@ -9,8 +9,11 @@
             <p class="label"> 07.10.2023 </p>
         </div>
 
-        <div class="text" v-bind:src=baseMessage> {{ baseMessage }}</div>
-        <br>
+        <p id="content" class="box" ref="baseMessage" contenteditable="true" @input="updateParagraph(baseMessage)">
+            {{ baseMessage }}
+        </p>
+
+        <button class="ok-button" @click="editMessage(baseMessage)"><i class="fa fa-check" aria-hidden="true"></i></button>
         <div>
             <img v-bind:src=baseImage style="max-width: 600px; max-height: 700px">
         </div>
@@ -21,6 +24,7 @@
 
 export default {
     name: "Preview",
+    emits: ['edit-message'],
     props: {
         message: {
             type: String,
@@ -36,6 +40,11 @@ export default {
             baseMessage: "This is a preview of your post.",
             baseImage: "https://user-images.githubusercontent.com/47315479/81145216-7fbd8700-8f7e-11ea-9d49-bd5fb4a888f1.png",
             avatar: "https://cdn-icons-png.flaticon.com/512/44/44948.png?w=740&t=st=1689073293~exp=1689073893~hmac=e5fa93103e45bc05deda27d257b470cdaecf7aba1f75880621d7fba63e608ac2",
+            content: {
+                baseMessage: "This is a preview of your post.",
+            },
+            editedMessage: ""
+
         };
     },
     computed: {
@@ -52,6 +61,7 @@ export default {
         },
         message(newMessage) {
             this.updateMessage(newMessage);
+            this.$refs.baseMessage.innerHTML = newMessage;
         }
     },
     methods: {
@@ -60,6 +70,12 @@ export default {
         },
         updateMessage(message) {
             this.baseMessage = message;
+        },
+        updateParagraph(event) {
+            this.baseMessage = this.$refs.baseMessage.innerHTML;
+        },
+        editMessage(text) {
+            this.$emit("edit-message", text);
         }
     }
 }
@@ -69,6 +85,31 @@ export default {
 hr {
     visibility: hidden;
     color: crimson;
+}
+
+.ok-button {
+
+    border: none;
+    background: none;
+    font-size: 25px;
+    color: crimson;
+    cursor: pointer;
+    outline: none;
+}
+
+.box {
+    width: 100%;
+    height: auto;
+    border: none;
+    border-radius: 5px;
+    padding: 1%;
+    font-size: 16px;
+    outline: none;
+    resize: none;
+    overflow: hidden;
+    text-align: left;
+    margin-bottom: 1%;
+
 }
 
 .username {

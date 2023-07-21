@@ -59,7 +59,7 @@ export default {
             axios.post("http://127.0.0.1:3000/post", {
                 accessToken: this.token,
                 body: this.shownText,
-                title: "this.shownText",
+                title: "Title",
                 imageUrl: this.shownImage
             })
                 .then((response) => {

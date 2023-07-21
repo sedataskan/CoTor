@@ -3,10 +3,10 @@
         <div class="grid-container">
             <div class="grid-item left">
                 <Selector @data-fetched="dataFetched" @image-fetched="imageFetched" />
-                <Share :message="fetchedMessage" :imageUrl="fetchedImage" />
+                <Share :message="editedMessage" :imageUrl="fetchedImage" />
             </div>
             <div class="grid-item right">
-                <Preview :message="fetchedMessage" :imageUrl="fetchedImage" />
+                <Preview @edit-message="editMessage" :message="fetchedMessage" :imageUrl="fetchedImage" />
             </div>
             <div class="grid-item">
             </div>
@@ -27,7 +27,8 @@ export default {
     data() {
         return {
             fetchedMessage: "",
-            fetchedImage: ""
+            fetchedImage: "",
+            editedMessage: ""
         };
     },
     components: { Selector, Share, Preview, Footer },
@@ -37,6 +38,9 @@ export default {
         },
         imageFetched(image) {
             this.fetchedImage = image;
+        },
+        editMessage(message) {
+            this.editedMessage = message;
         }
     }
 }
