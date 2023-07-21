@@ -8,8 +8,6 @@
             <div class="grid-item right">
                 <Preview @edit-message="editMessage" :message="fetchedMessage" :imageUrl="fetchedImage" />
             </div>
-            <div class="grid-item">
-            </div>
         </div>
     </body>
     <Footer />

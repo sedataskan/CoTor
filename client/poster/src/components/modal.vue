@@ -38,7 +38,6 @@
             </div>
         </div>
     </transition>
-    }`
 </template>
 
 <script>
