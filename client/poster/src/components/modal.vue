@@ -13,18 +13,28 @@
                         <h5>
                             How to Use CoTor?
                         </h5>
-                        <li>
-                            Choose a special date from the dropdown menu.
-                        </li>
-                        <li>
-                            Click "Generate" button.
-                        </li>
-                        <li>
-                            You can see your post's preview on right side.
-                        </li>
-                        <li>
-                            Click "Share" button to share your post on LinkedIn.
-                        </li>
+                        <dl>
+                            <dd>
+                                <i> 1 </i>
+                                Choose a special date from the dropdown menu.
+                            </dd>
+                            <dd>
+                                <i> 2 </i>
+                                Click "Generate" button.
+                            </dd>
+                            <dd>
+                                <i> 3 </i>
+                                You can see your post's preview on right side.
+                            </dd>
+                            <dd>
+                                <i class="inner"> - </i>
+                                Also you can edit your post's content.
+                            </dd>
+                            <dd>
+                                <i> 4 </i>
+                                Click "Share" button to share your post on LinkedIn.
+                            </dd>
+                        </dl>
 
                     </slot>
                 </div>
@@ -49,6 +59,17 @@ export default {
 </script>
 
 <style scoped>
+i {
+    font-size: 18px;
+    color: crimson;
+    margin-right: 5px;
+    font-weight: bold;
+}
+
+.inner {
+    margin-left: 20px;
+}
+
 .modal-mask {
     position: fixed;
     z-index: 9998;
