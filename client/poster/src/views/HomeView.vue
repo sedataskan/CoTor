@@ -1,15 +1,17 @@
 <template>
-    <div class="grid-container">
-        <div class="grid-item left">
-            <Selector @data-fetched="dataFetched" @image-fetched="imageFetched" />
-            <Share :message="fetchedMessage" :imageUrl="fetchedImage" />
+    <body>
+        <div class="grid-container">
+            <div class="grid-item left">
+                <Selector @data-fetched="dataFetched" @image-fetched="imageFetched" />
+                <Share :message="fetchedMessage" :imageUrl="fetchedImage" />
+            </div>
+            <div class="grid-item right">
+                <Preview :message="fetchedMessage" :imageUrl="fetchedImage" />
+            </div>
+            <div class="grid-item">
+            </div>
         </div>
-        <div class="grid-item right">
-            <Preview :message="fetchedMessage" :imageUrl="fetchedImage" />
-        </div>
-        <div class="grid-item">
-        </div>
-    </div>
+    </body>
     <Footer />
 </template>
 

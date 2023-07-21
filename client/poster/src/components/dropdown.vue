@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h5><i>Date Picker</i></h5>
+        <h5><i>Special Day</i></h5>
         <div class="dropdown">
             <select v-model="selected">
                 <option v-for="option in options" v-bind:value="option.value">

@@ -12,23 +12,50 @@
                     </div>
 
                 </div>
+                <div>
+                    <button class="show-modal" @click="showModal = true"><i class="fa fa-info-circle"
+                            aria-hidden="true"></i></button>
+
+                </div>
             </nav>
         </div>
     </header>
+    <teleport to="body">
+        <modal :show="showModal" @close="showModal = false">
+            <template #header>
+                <h3 class="brand">CoTor</h3>
+            </template>
+        </modal>
+    </teleport>
 </template>
 
 <script>
+import Modal from './modal.vue'
+
 export default {
     name: 'Navbar',
     data() {
-        return {}
-    }
+        return {
+            showModal: false
+        }
+    },
+    components: {
+        Modal
+    },
 }
 </script>
 
 <style scoped>
+.show-modal {
+    border: none;
+    background: none;
+    font-size: 25px;
+    color: crimson;
+    cursor: pointer;
+    outline: none;
+}
+
 .brand {
-    font-size: 20px;
     font-weight: bold;
     padding: 1%;
     color: crimson;
