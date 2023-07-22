@@ -9,8 +9,7 @@
             <p class="label"> 07.10.2023 </p>
         </div>
 
-        <p id="content" class="box" ref="baseMessage" contenteditable="true"
-            @input="updateParagraph(baseMessage), editMessage(baseMessage)">
+        <p ref="content" class="box" contenteditable="true" @input="updateParagraph(baseMessage), editMessage(baseMessage)">
             {{ baseMessage }}
         </p>
         <div>
@@ -60,7 +59,7 @@ export default {
         },
         message(newMessage) {
             this.updateMessage(newMessage);
-            this.$refs.baseMessage.innerHTML = newMessage;
+            this.$refs.content.textContent = newMessage;
         }
     },
     methods: {
@@ -71,11 +70,11 @@ export default {
             this.baseMessage = message;
         },
         updateParagraph(event) {
-            this.baseMessage = this.$refs.baseMessage.innerHTML;
+            this.baseMessage = this.$refs.content.textContent;
         },
         editMessage(text) {
             this.$emit("edit-message", text);
-        }
+        },
     }
 }
 </script>
