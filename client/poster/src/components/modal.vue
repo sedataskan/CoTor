@@ -20,7 +20,7 @@
                             </dd>
                             <dd>
                                 <i> 2 </i>
-                                Click "Generate" button.
+                                Click "Generate Text" and "Generate Image" button.
                             </dd>
                             <dd>
                                 <i> 3 </i>
@@ -28,7 +28,7 @@
                             </dd>
                             <dd>
                                 <i class="inner"> - </i>
-                                Also you can edit your post's content.
+                                Also you can edit your post's contents.
                             </dd>
                             <dd>
                                 <i> 4 </i>
