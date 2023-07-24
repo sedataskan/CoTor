@@ -9,6 +9,10 @@ const axios = require("axios");
 const fs = require("fs");
 const { v4: uuidv4 } = require("uuid");
 const Jimp = require("jimp");
+const sharp = require("sharp");
+
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
 // CORS
 app.use(cors());
@@ -69,7 +73,6 @@ app.post("/post", async function (req, res) {
     body: req.body.body,
     imageUrl: req.body.imageUrl,
   };
-
   getUserId(ACCESS_TOKEN)
     .then((user) => {
       const userId = JSON.parse(user).id;
@@ -77,14 +80,13 @@ app.post("/post", async function (req, res) {
         .then((registerUpload) => {
           const assetId = JSON.parse(registerUpload).value.asset;
           uploadImage(
-            postData.imageUrl,
             JSON.parse(registerUpload).value.uploadMechanism[
               "com.linkedin.digitalmedia.uploading.MediaUploadHttpRequest"
             ].uploadUrl,
             ACCESS_TOKEN
           )
-            .then((path) => {
-              publish(ACCESS_TOKEN, userId, postData, assetId)
+            .then(async (path) => {
+              await publish(ACCESS_TOKEN, userId, postData, assetId)
                 .then((result) => {
                   deleteImage(path);
                   res.send(result);
@@ -141,76 +143,38 @@ function registerImage(userId, access_token) {
   });
 }
 
-function uploadImage(imageUrl, uploadUrl, accessToken) {
+function uploadImage(uploadUrl, accessToken) {
   return new Promise((resolve, reject) => {
-    const path = uuidv4() + ".jpg";
-    downloadImage(imageUrl, path).then((_) => {
-      watermarkImage(path).then((_) => {
-        const fileData = fs.readFileSync(path);
-        request.post(
-          uploadUrl,
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-              "Content-Type": "application/octet-stream",
-            },
-            body: fileData,
-          },
-          function (err, response, body) {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(path);
-            }
-          }
-        );
-      });
-    });
-  });
-}
-
-function watermarkImage(path) {
-  const logoPath = "../assets/raquun-logo.png";
-  const logo2Path = "../assets/company-logo.png";
-  return new Promise((resolve, reject) => {
-    Jimp.read(path)
-      .then(async (mainImage) => {
-        const logo = await Jimp.read(logoPath);
-        const logo2 = await Jimp.read(logo2Path);
-
-        const logoWidth = mainImage.getWidth() / 8;
-        const logoHeight = logo.getHeight() / (logo.getWidth() / logoWidth);
-        logo.resize(logoWidth, logoHeight);
-
-        const logoX = 100;
-        const logoY = mainImage.getHeight() - logo.getHeight() - 100;
-
-        const logo2Width = mainImage.getWidth() / 8;
-        const logo2Height = logo2.getHeight() / (logo2.getWidth() / logo2Width);
-        logo2.resize(logo2Width, logo2Height);
-
-        const logo2X =
-          mainImage.getWidth() - logo2.bitmap.width + mainImage.getWidth() / 60;
-        const logo2Y =
-          mainImage.getHeight() -
-          logo2.bitmap.height +
-          mainImage.getHeight() / 27;
-
-        mainImage.composite(logo, logoX, logoY);
-        mainImage.composite(logo2, logo2X, logo2Y);
-        return await mainImage.writeAsync(path);
-      })
-      .then(() => {
-        resolve(path);
-      })
-      .catch((err) => {
-        reject(err);
-      });
+    const path = "resized.jpeg";
+    const fileData = fs.readFileSync(path);
+    request.post(
+      uploadUrl,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/octet-stream",
+        },
+        body: fileData,
+      },
+      function (err, response, body) {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(path);
+        }
+      }
+    );
   });
 }
 
 function deleteImage(path) {
   fs.unlink(path, (err) => {
+    if (err) {
+      console.log("Error deleting image!");
+    }
+    console.log("Image deleted successfully!");
+  });
+  fs.unlink("image.jpeg", (err) => {
     if (err) {
       console.log("Error deleting image!");
     }
@@ -302,6 +266,50 @@ function getUserId(access_token) {
   });
 }
 
+function watermarkImage(path) {
+  const logoPath = "../assets/raquun-logo.png";
+  return new Promise((resolve, reject) => {
+    Jimp.read(path)
+      .then(async (mainImage) => {
+        const logo = await Jimp.read(logoPath);
+
+        const logoWidth = mainImage.getWidth() / 8;
+        const logoHeight = logo.getHeight() / (logo.getWidth() / logoWidth);
+        logo.resize(logoWidth, logoHeight);
+
+        const logoX = 100;
+        const logoY = mainImage.getHeight() - logo.getHeight() - 100;
+
+        mainImage.composite(logo, logoX, logoY);
+        return await mainImage.writeAsync(path);
+      })
+      .then(() => {
+        resolve(path);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+}
+
+function imageToBase64(imagePath) {
+  try {
+    const imageBuffer = fs.readFileSync(imagePath);
+    const base64String = imageBuffer.toString("base64");
+
+    return base64String;
+  } catch (err) {
+    console.error("Error converting image to Base64:", err.message);
+    return null;
+  }
+}
+
+async function resizeImage(imagePath) {
+  const resized = "resized.jpeg";
+  await sharp(imagePath).resize({ width: 800 }).toFile(resized);
+  return resized;
+}
+
 // ---------------unsplash part----------------
 app.post("/photo", async (req, res) => {
   var date = JSON.stringify(req.body);
@@ -318,9 +326,16 @@ app.post("/photo", async (req, res) => {
   try {
     const response = await axios.get(apiUrl);
     const imageUrl = response.data.urls.raw;
-    return res.status(200).json({
-      success: true,
-      imageUrl: imageUrl,
+
+    await downloadImage(imageUrl, "image.jpeg").then(async (_) => {
+      await watermarkImage("image.jpeg").then(async (_) => {
+        await resizeImage("image.jpeg");
+        const image = imageToBase64("resized.jpeg");
+        return res.status(200).json({
+          success: true,
+          imageUrl: image,
+        });
+      });
     });
   } catch (error) {
     console.log(error.message);

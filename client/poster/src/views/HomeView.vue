@@ -3,7 +3,7 @@
         <div class="grid-container">
             <div class="grid-item left">
                 <Selector @data-fetched="dataFetched" @image-fetched="imageFetched" />
-                <Share :message="editedMessage" :imageUrl="fetchedImage" />
+                <Share :editedMessage="editedMessage" :message="fetchedMessage" :imageUrl="fetchedImage" />
             </div>
             <div class="grid-item right">
                 <Preview @edit-message="editMessage" :message="fetchedMessage" :imageUrl="fetchedImage" />

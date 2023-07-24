@@ -39,6 +39,10 @@ export default {
             type: String,
             required: true
         },
+        editedMessage: {
+            type: String,
+            required: true
+        },
         imageUrl: {
             type: String,
             required: true
@@ -46,6 +50,9 @@ export default {
     },
     computed: {
         shownText() {
+            if (this.editedMessage != "") {
+                return this.editedMessage;
+            }
             return this.message ?? "Generated Message...";
         },
         shownImage() {

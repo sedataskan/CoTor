@@ -64,13 +64,15 @@ export default {
     },
     methods: {
         updateImageUrl(imageUrl) {
-            this.baseImage = imageUrl;
+            this.baseImage = "data:image/jpg;base64, " + imageUrl;
         },
         updateMessage(message) {
             this.baseMessage = message;
+            console.log(this.baseMessage);
         },
-        updateParagraph(event) {
+        updateParagraph() {
             this.baseMessage = this.$refs.content.textContent;
+            console.log(this.baseMessage);
         },
         editMessage(text) {
             this.$emit("edit-message", text);
