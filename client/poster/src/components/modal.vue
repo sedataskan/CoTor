@@ -28,7 +28,13 @@
                             </dd>
                             <dd>
                                 <i class="inner"> - </i>
-                                Also you can edit your post's contents.
+                                Also you can edit your post's text. Just click on the text and edit it.
+
+                            </dd>
+                            <dd>
+                                <i class="inner"> - </i>
+                                If you want to change the image or text, click on the "Generate Image" or "Generate Text"
+                                button again.
                             </dd>
                             <dd>
                                 <i> 4 </i>
