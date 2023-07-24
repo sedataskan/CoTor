@@ -97,7 +97,6 @@ Start the server
 | "request": "^2.88.2"         | [npmjs.com/package/request](https://www.npmjs.com/package/request)                         |
 | "body-parser": "^1.20.2"     | [npmjs.com/package/body-parser](https://www.npmjs.com/package/body-parser)                 |
 | "axios": "^1.4.0"            | [npmjs.com/package/axios](https://www.npmjs.com/package/axios)                             |
-| "uuid": "^9.0.0"             | [npmjs.com/package/uuid](https://www.npmjs.com/package/uuid)                               |
 | "jimp": "^0.22.8"            | [npmjs.com/package/jimp](https://www.npmjs.com/package/jimp)                               |
 
 ## Api

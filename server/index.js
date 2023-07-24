@@ -7,7 +7,6 @@ const { Configuration, OpenAIApi } = require("openai");
 const request = require("request");
 const axios = require("axios");
 const fs = require("fs");
-const { v4: uuidv4 } = require("uuid");
 const Jimp = require("jimp");
 const sharp = require("sharp");
 
