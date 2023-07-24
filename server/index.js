@@ -9,6 +9,7 @@ const axios = require("axios");
 const fs = require("fs");
 const Jimp = require("jimp");
 const sharp = require("sharp");
+const { getRandomValues } = require("crypto");
 
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
@@ -318,7 +319,7 @@ app.post("/photo", async (req, res) => {
   const getId = `https://api.unsplash.com/search/photos?query=${prompt}&client_id=${apiKey}`;
 
   const response = await axios.get(getId);
-  const imageId = response.data.results[0].id;
+  const imageId = response.data.results[Math.floor(Math.random() * 5)].id;
 
   const apiUrl = `https://api.unsplash.com/photos/${imageId}?client_id=${apiKey}`;
 

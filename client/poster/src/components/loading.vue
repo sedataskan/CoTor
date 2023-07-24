@@ -4,8 +4,10 @@
         <Loading :active.sync="isLoading" :is-full-page="fullPage" :transition="true" :color="'#ff1d5e'" :loader="'spinner'"
             :height="64" :width="64" :opacity="0.5" :z-index="9999" :background="'#000000'" :container="'body'"
             :target="'body'" />
-        <button @click="sendRequest" :disabled="selected == null" type="submit"
-            class="btn btn-danger button">Generate</button>
+        <button @click="sendRequest" :disabled="selected == null" type="submit" class="btn btn-danger button">Generate
+            Text</button>
+        <button @click="sendRequestImage" :disabled="selected == null" type="submit" class="btn btn-danger button">Generate
+            Image</button>
     </div>
 </template>
 
@@ -45,6 +47,9 @@ export default {
                 .finally(() => {
                     this.isLoading = false; // close loading screen
                 });
+        },
+        sendRequestImage() {
+            this.isLoading = true;
             axios.post('http://127.0.0.1:3000/photo', {
                 selected: this.selected
             })
@@ -54,8 +59,17 @@ export default {
                 .catch((error) => {
                     this.$emit("image-fetched", error.message);
                 })
-        },
+                .finally(() => {
+                    this.isLoading = false; // close loading screen
+                });
+        }
 
     }
 }
 </script>
+
+<style scoped>
+button {
+    margin-left: 1%;
+}
+</style>
