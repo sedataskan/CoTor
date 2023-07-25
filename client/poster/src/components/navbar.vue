@@ -2,8 +2,8 @@
     <header>
         <div id="nav">
             <nav class="container-fluid navbar navbar-expand-lg navbar-light bg-light">
-                <RouterLink to="/" class="navbar-brand brand" href="HomeView.vue">CoTor
-                </RouterLink>
+                <a to="/" class="navbar-brand brand" href="/">CoTor
+                </a>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
