@@ -268,6 +268,7 @@ function getUserId(access_token) {
 
 function watermarkImage(path) {
   const logoPath = "../assets/raquun-logo.png";
+  const whitePath = "../assets/white.png";
   return new Promise((resolve, reject) => {
     Jimp.read(path)
       .then(async (mainImage) => {
@@ -278,8 +279,18 @@ function watermarkImage(path) {
         logo.resize(logoWidth, logoHeight);
 
         const logoX = 100;
-        const logoY = mainImage.getHeight() - logo.getHeight() - 100;
+        const logoY = mainImage.getHeight() - logo.getHeight() - 35;
 
+        const white = await Jimp.read(whitePath);
+
+        const whiteWidth = mainImage.getWidth();
+        const whiteHeight = logoHeight * 2;
+        white.resize(whiteWidth, whiteHeight);
+
+        const whiteX = 0;
+        const whiteY = mainImage.getHeight() - white.getHeight() - 25;
+
+        mainImage.composite(white, whiteX, whiteY);
         mainImage.composite(logo, logoX, logoY);
         return await mainImage.writeAsync(path);
       })
@@ -306,7 +317,7 @@ function imageToBase64(imagePath) {
 
 async function resizeImage(imagePath) {
   const resized = "resized.jpeg";
-  await sharp(imagePath).resize({ width: 800 }).toFile(resized);
+  await sharp(imagePath).resize({ width: 800, height: 800 }).toFile(resized);
   return resized;
 }
 
@@ -328,8 +339,8 @@ app.post("/photo", async (req, res) => {
     const imageUrl = response.data.urls.raw;
 
     await downloadImage(imageUrl, "image.jpeg").then(async (_) => {
-      await watermarkImage("image.jpeg").then(async (_) => {
-        await resizeImage("image.jpeg");
+      await resizeImage("image.jpeg").then(async (_) => {
+        await watermarkImage("resized.jpeg");
         const image = imageToBase64("resized.jpeg");
         return res.status(200).json({
           success: true,
