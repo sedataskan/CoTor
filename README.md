@@ -48,7 +48,7 @@
 Clone the project
 
 ```bash
-  git clone https://github.com/imtribute12/CoTor.git
+  git clone https://github.com/sedataskan/CoTor.git
 ```
 
 Go to the project directory
