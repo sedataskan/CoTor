@@ -7,14 +7,12 @@ require("dotenv").config();
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
-// CORS
 app.use(cors());
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
 
-//get text with openai.js
 var text = require("./modules/openai.js");
 var image = require("./modules/image.js");
 var linkedin = require("./modules/linkedin.js");

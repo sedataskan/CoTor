@@ -7,8 +7,6 @@ const fs = require("fs");
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
-//------------linkedin part----------------
-
 var ACCESS_TOKEN = process.env.ACCESS_TOKEN;
 
 async function post(postData) {
